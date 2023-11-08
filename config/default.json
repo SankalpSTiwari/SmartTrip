@@ -1,3 +1,4 @@
 {
-    "mongoURI": "mongodb+srv://smarttrip:sm1234@cluster0.km8onfu.mongodb.net/?retryWrites=true&w=majority"
+    "mongoURI": "mongodb+srv://smarttrip:sm1234@cluster0.km8onfu.mongodb.net/?retryWrites=true&w=majority",
+    "jwtSecret": "mysecrettoken"
 }
