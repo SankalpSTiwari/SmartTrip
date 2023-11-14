@@ -9,12 +9,12 @@ const { check, validationResult } = require('express-validator');
 const User = require('../../models/User');
 
 // @route   POST api/users
-// @desc    Register user
+// @desc    Register route
 // @access  Public
 router.post(
   '/',
   [
-    check('name', 'Name is required').not().isEmpty(),
+    check('name', 'Name is required').notEmpty(),
     check('email', 'Please include a valid email').isEmail(),
     check(
       'password',
@@ -23,6 +23,7 @@ router.post(
   ],
   async (req, res) => {
     const errors = validationResult(req);
+    console.log('here 1');
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
@@ -30,7 +31,7 @@ router.post(
     const { name, email, password } = req.body;
 
     try {
-      // See if user exists
+      // See if User exists
       let user = await User.findOne({ email });
 
       if (user) {
@@ -52,27 +53,33 @@ router.post(
         avatar,
         password,
       });
-      // Encrypt password
+
+      // Encrypt the password using bcrypt
       const salt = await bcrypt.genSalt(10);
+
       user.password = await bcrypt.hash(password, salt);
 
+      // Save user
       await user.save();
 
-      // Return jsonwebtoken
+      // Return JWT
       const payload = {
         user: {
           id: user.id,
-        }
+        },
       };
 
       jwt.sign(
         payload,
-        config.get('jwtSecret'), { expiresIn: 36000000 }, (err, token) => {
+        config.get('jwtSecret'),
+        { expiresIn: 3600000 }, // To be modified inproduction
+        (err, token) => {
           if (err) throw err;
           res.json({ token });
         }
       );
     } catch (err) {
+      console.log('here 2');
       console.error(err.message);
       res.status(500).send('Server error');
     }
