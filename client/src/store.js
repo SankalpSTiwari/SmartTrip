@@ -8,6 +8,6 @@ const initialState = {};
 
 const middleware = [thunk];
 
-const store = configureStore({reducer: rootReducer,});
+const store = configureStore({ reducer: rootReducer });
 
 export default store;

@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const auth = require('../../middleware/auth');
-const User = require('../../models/User');
+const gravatar = require('gravatar');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
-const bcrypt = require('bcryptjs');
 const { check, validationResult } = require('express-validator');
+
 // @route   GET api/auth
 // @desc    Test route
 // @access  Public
@@ -20,16 +21,13 @@ router.get('/', auth, async (req, res) => {
 });
 
 // @route   POST api/auth
-// @desc    Authenticate user & get token
+// @desc    Authenticate user and get token
 // @access  Public
 router.post(
   '/',
   [
     check('email', 'Please include a valid email').isEmail(),
-    check(
-      'password',
-      'Password is required'
-    ).exists()
+    check('password', 'Password is required').exists(),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -40,32 +38,41 @@ router.post(
     const { email, password } = req.body;
 
     try {
-      // See if user exists
+      // See if User exists
       let user = await User.findOne({ email });
 
       if (!user) {
         return res
           .status(400)
-          .json({ errors: [{ msg: 'Invalid credentials' }] });
+          .json({ errors: [{ msg: 'Invalid Credentials' }] });
       }
 
-      const isMatch = await bcrypt.compare(password, user.password);
+      // Get users gravatar
+      const avatar = gravatar.url(email, {
+        s: '200',
+        r: 'pg',
+        d: 'mm',
+      });
 
-      if(!isMatch){
-        return res.status(400).json({errors: [{msg: 'Invalid Credentials'}]});
-      }
-
-      // Return jsonwebtoken
+      // Return JWT
       const payload = {
         user: {
           id: user.id,
         },
       };
 
+      const isMatch = await bcrypt.compare(password, user.password);
+
+      if (!isMatch) {
+        return res
+          .status(400)
+          .json({ errors: [{ msg: 'Invalid Credentials' }] });
+      }
+
       jwt.sign(
         payload,
         config.get('jwtSecret'),
-        { expiresIn: 36000000 },
+        { expiresIn: 3600000 }, // To be modified inproduction
         (err, token) => {
           if (err) throw err;
           res.json({ token });
