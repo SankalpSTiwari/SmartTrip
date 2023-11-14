@@ -44,6 +44,18 @@ img {
   margin-bottom: 3rem;
 }
 
+.container.alert-shown {
+  margin-top: 10px;
+}
+
+.alert-container{
+  max-width: 1100px;
+  margin: auto;
+  overflow: hidden;
+  padding: 0 2rem;
+  margin-top: 6rem;
+}
+
 /* Text Styles*/
 .x-large {
   font-size: 4rem;
