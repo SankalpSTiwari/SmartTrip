@@ -7,7 +7,7 @@ const Trip = require('../../models/Trip');
 const User = require('../../models/User');
 
 const openai = new OpenAI({
-    apiKey: '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',
+    apiKey: 'API_KEY_HERE',
 });
 // @route   Post api/trips/generate
 // @desc    Generate a post
