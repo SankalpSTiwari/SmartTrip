@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Markdown from 'react-markdown'
 
 const Planner = () => {
   const [destination, setDestination] = useState("California");
@@ -13,10 +14,12 @@ const Planner = () => {
     e.preventDefault();
     try {
       const prompt = `Generate a personalized travel itinerary for a trip to ${destination} with a budget of ${budget}. The traveler is interested in a ${travelStyle} vacation and enjoys ${activityType}. The itinerary should include ${activityType} activities and dining options. Please provide a detailed itinerary for ${duration} days.`;
-      const response = await axios.post("/api/generate-trip-plan", {
+      console.log(prompt)
+      const response = await axios.post("api/trips/generate", {
         prompt,
       });
-      setTripPlan(response.data.tripPlan);
+      setTripPlan(response.data);
+      console.log(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -126,20 +129,23 @@ const Planner = () => {
           </div>
         </div>
       </form>
-      <div className="form-box-plan">
+      {/* <div className="form-box-plan"> */}
         <div className="form-plan-container">
           <label htmlFor="tripPlan">Trip Plan</label>
           <br />
-          <textarea
+          <Markdown>
+          {/* <textarea
             className="form-trip-plan"
             id="tripPlan"
             rows="5"
             value={tripPlan}
             readOnly
-          />
+          /> */}
+          {tripPlan}
+          </Markdown>
         </div>
       </div>
-    </div>
+    // </div>
   );
 };
 
