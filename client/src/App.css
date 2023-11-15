@@ -14,7 +14,7 @@
 }
 
 body {
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Nanum Myeongjo', serif;
   font-size: 1rem;
   line-height: 1.6;
   background-color: #fff;
@@ -99,6 +99,7 @@ img {
 
 .form-destination, .form-budget, .form-duration, .form-travel-style, .form-activity-type{
   width: 40vh;
+  font-family: 'Nanum Myeongjo', serif;
 }
 
 .form-plan-container{
@@ -401,6 +402,10 @@ button {
 
 .navbar .welcome span {
   margin-right: 0.6rem;
+}
+
+.navbar-heading{
+  font-family: 'Handlee', cursive;
 }
 
 /* Landing Page */

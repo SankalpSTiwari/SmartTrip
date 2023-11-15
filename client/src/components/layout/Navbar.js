@@ -27,7 +27,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   );
   return (
     <nav className="navbar bg-dark">
-      <h1>
+      <h1 className="navbar-heading">
         <Link to="/">
           <i className="fas fa-code"></i> SmartTrip
         </Link>
