@@ -12,7 +12,7 @@ const Planner = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const prompt = `Generate a personalized travel itinerary for a trip to ${destination} with a budget of ${budget}. The traveler is interested in a ${travelStyle} vacation and enjoys ${activityType}. They are looking for accommodations and prefer transportation. The itinerary should include ${activityType} activities and dining options. Please provide a detailed itinerary for ${duration} days.`;
+      const prompt = `Generate a personalized travel itinerary for a trip to ${destination} with a budget of ${budget}. The traveler is interested in a ${travelStyle} vacation and enjoys ${activityType}. The itinerary should include ${activityType} activities and dining options. Please provide a detailed itinerary for ${duration} days.`;
       const response = await axios.post("/api/generate-trip-plan", {
         prompt,
       });
