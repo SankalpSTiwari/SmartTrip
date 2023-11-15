@@ -81,15 +81,41 @@ img {
 }
 
 .form-box{
-  width: 50%;
+  width: 60%;
   margin: 20px auto;
-  border: 1px solid #ccc;
-  background-color: rgb(55, 69, 78);
+  border: 1px solid #17a2b8;
+  background-color: rgb(35, 36, 36);
+}
+
+.form-box-plan{
+  width: 60%;
+  height: 50vh;
+  margin: 20px auto;
+  border: 1px solid #17a2b8;
+  background-color: rgb(35, 36, 36);
+  display: flex;
+  justify-content: space-around;
 }
 
 .form-destination, .form-budget, .form-duration, .form-travel-style, .form-activity-type{
-  width: 30vh;
+  width: 40vh;
 }
+
+.form-plan-container{
+  margin-top: 20px;
+  text-align: center;
+}
+
+.form-trip-plan{
+  overflow-y: scroll;
+  margin-top: 10px;
+  width: 110vh;
+  height: 40vh;
+  background-color: rgb(35, 36, 36);
+  border: 0px;
+}
+
+
 
 /* Text Styles*/
 .x-large {

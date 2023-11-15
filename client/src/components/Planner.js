@@ -20,7 +20,7 @@ const Planner = () => {
         <div className="form-box">
           <div className="form-row">
             <div className="form-group">
-              <label htmlFor="destination">Destination Country</label>
+              <label htmlFor="destination">Destination</label>
               <br />
               <input
                 type="text"
@@ -113,20 +113,23 @@ const Planner = () => {
             style={{ paddingTop: "10px", paddingBottom: "20px" }}
           >
             <button type="submit" className="btn btn-primary">
-              Generate trip plan
+              Generate trip plan!
             </button>
           </div>
         </div>
       </form>
-      <div className="mt-3">
-        <label htmlFor="tripPlan">Trip Plan</label>
-        <textarea
-          className="form-trip-plan"
-          id="tripPlan"
-          rows="5"
-          value={tripPlan}
-          readOnly
-        />
+      <div className="form-box-plan">
+        <div className="form-plan-container">
+          <label htmlFor="tripPlan">Trip Plan</label>
+          <br />
+          <textarea
+            className="form-trip-plan"
+            id="tripPlan"
+            rows="5"
+            value={tripPlan}
+            readOnly
+          />
+        </div>
       </div>
     </div>
   );
