@@ -76,14 +76,19 @@ img {
 
 .form-row{
   display: flex;
-  /* justify-content: ; */
+  justify-content: space-evenly;
+  margin-top: 10px;
 }
 
 .form-box{
-  width: 75%;
+  width: 50%;
   margin: 20px auto;
   border: 1px solid #ccc;
-  background-color: darkgray;
+  background-color: rgb(55, 69, 78);
+}
+
+.form-destination, .form-budget, .form-duration, .form-travel-style, .form-activity-type{
+  width: 30vh;
 }
 
 /* Text Styles*/

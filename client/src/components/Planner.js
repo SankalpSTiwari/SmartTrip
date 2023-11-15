@@ -85,30 +85,37 @@ const Planner = () => {
               </select>
             </div>
           </div>
-          <div className="form-group">
-            <label htmlFor="activityType">Activity Type</label>
-            <br />
-            <select
-              className="form-activity-type"
-              id="activityType"
-              value={activityType}
-              onChange={(e) => setActivityType(e.target.value)}
-              required
-            >
-              <option value="">Select activity type</option>
-              <option value="Outdoors">Outdoors</option>
-              <option value="Sightseeing">Sightseeing</option>
-              <option value="Shopping">Shopping</option>
-              <option value="Nightlife">Nightlife</option>
-              <option value="Museums">Museums</option>
-              <option value="Theme Parks">Theme Parks</option>
-              <option value="Water Sports">Water Sports</option>
-              <option value="Yoga and Wellness">Yoga and Wellness</option>
-            </select>
+          <div className="form-row">
+            <div className="form-group">
+              <label htmlFor="activityType">Activity Type</label>
+              <br />
+              <select
+                className="form-activity-type"
+                id="activityType"
+                value={activityType}
+                onChange={(e) => setActivityType(e.target.value)}
+                required
+              >
+                <option value="">Select activity type</option>
+                <option value="Outdoors">Outdoors</option>
+                <option value="Sightseeing">Sightseeing</option>
+                <option value="Shopping">Shopping</option>
+                <option value="Nightlife">Nightlife</option>
+                <option value="Museums">Museums</option>
+                <option value="Theme Parks">Theme Parks</option>
+                <option value="Water Sports">Water Sports</option>
+                <option value="Yoga and Wellness">Yoga and Wellness</option>
+              </select>
+            </div>
           </div>
-          <button type="submit" className="btn btn-primary">
-            Generate trip plan
-          </button>
+          <div
+            className="form-row"
+            style={{ paddingTop: "10px", paddingBottom: "20px" }}
+          >
+            <button type="submit" className="btn btn-primary">
+              Generate trip plan
+            </button>
+          </div>
         </div>
       </form>
       <div className="mt-3">
