@@ -1,17 +1,25 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const Planner = () => {
-  const [destination, setDestination] = useState("");
-  const [budget, setBudget] = useState("");
-  const [duration, setDuration] = useState("");
-  const [travelStyle, setTravelStyle] = useState("");
-  const [activityType, setActivityType] = useState("");
+  const [destination, setDestination] = useState("California");
+  const [budget, setBudget] = useState("1000");
+  const [duration, setDuration] = useState("5");
+  const [travelStyle, setTravelStyle] = useState("Adventure");
+  const [activityType, setActivityType] = useState("Sightseeing");
   const [tripPlan, setTripPlan] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Call your AI function here to generate the trip plan
-    setTripPlan("AI generated trip plan goes here");
+    try {
+      const prompt = `Generate a personalized travel itinerary for a trip to ${destination} with a budget of ${budget}. The traveler is interested in a ${travelStyle} vacation and enjoys ${activityType}. They are looking for accommodations and prefer transportation. The itinerary should include ${activityType} activities and dining options. Please provide a detailed itinerary for ${duration} days.`;
+      const response = await axios.post("/api/generate-trip-plan", {
+        prompt,
+      });
+      setTripPlan(response.data.tripPlan);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
