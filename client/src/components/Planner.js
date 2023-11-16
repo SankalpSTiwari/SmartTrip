@@ -4,6 +4,7 @@ import Markdown from "react-markdown";
 import ReactMarkdown from "react-markdown";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import GeneratedTrip from "./GeneratedTrip";
+import downloadIcon from "../img/downloadIcon.png";
 
 const Planner = () => {
   const [destination, setDestination] = useState("California");
@@ -58,13 +59,33 @@ const Planner = () => {
     setTripPlan(null);
     // setDestination("");
     const formTripPlan = document.querySelector(".form-trip-plan");
+    const formBottom = document.querySelector(".form-bottom");
+    const loading = document.querySelector(".lds-roller");
 
-    if (formTripPlan) {
-      window.scrollTo({
-        top: formTripPlan.offsetTop,
-        behavior: "smooth",
-      });
-    }
+    // if (loading) {
+    window.scrollTo({
+      top: formBottom.offsetTop,
+      behavior: "smooth",
+    });
+    // }
+  };
+
+  const handleSaveToLocal = () => {
+    console.log("In handleSaveToLocal");
+    // Create a Blob containing the trip plan
+    const blob = new Blob([tripPlan], { type: "text/plain" });
+
+    // Create a download link
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "trip_plan.txt";
+
+    // Append the link to the body and trigger the click event
+    document.body.appendChild(link);
+    link.click();
+
+    // Remove the link from the body
+    document.body.removeChild(link);
   };
 
   return (
@@ -329,6 +350,57 @@ const Planner = () => {
               <div className="form-trip-plan">
                 <ReactMarkdown>{tripPlan}</ReactMarkdown>
               </div>
+
+              <button
+                type="button"
+                className="download-button"
+                onClick={handleSaveToLocal}
+                style={{
+                  fontSize: "13px",
+                  width: "130px",
+                  paddingTop: "2px",
+                  paddingBottom: "2px",
+                  marginTop: "10px",
+                  marginBottom: "15px",
+                  // paddingBottom: "10px",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                {/* <i
+                  class="fa-light fa-download"
+                  style={{ color: "#000000" }}
+                ></i> */}
+                <img
+                  src={downloadIcon}
+                  style={{
+                    width: "22px",
+                    height: "20px",
+                    paddingRight: "3px",
+                    // paddingTop: "7px",
+                    alignItems: "center",
+                  }}
+                />
+                Download Plan
+              </button>
+              {/* <button
+                
+              >
+                <div className="download-button-contents">
+                  <img
+                    src={downloadIcon}
+                    // alt="Download_Icon"
+                    style={{
+                      width: "22px",
+                      height: "20px",
+                      paddingRight: "5px",
+                      // paddingTop: "5px",
+                    }}
+                  />
+                  <div>Download Plan</div>
+                </div>
+              </button> */}
             </div>
           ) : null}
         </div>

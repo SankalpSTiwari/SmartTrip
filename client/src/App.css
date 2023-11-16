@@ -123,14 +123,14 @@ img {
 .form-destination, .form-optional-preferences{
   padding: 3px;
   font-size: 14px;
-  width: 60vh;
+  width: 90vh;
   height: 30px;
   font-family: 'Nanum Myeongjo', serif;
 }
 
 
 .form-budget, .form-duration, .form-travel-style, .form-activity-type, .form-traveler-type, .form-food-preference{
-  width: 28vh;
+  width: 42vh;
   height: 30px;
   font-family: 'Nanum Myeongjo', serif;
   padding: 3px;
@@ -213,6 +213,23 @@ img {
   padding-bottom: 3px;
 }
 
+/* .form-plan-container button{
+  text-align: center;
+  justify-content: center;
+  align-self: center;
+  justify-self: center;
+} */
+
+.download-button-contents{
+  /* display: flex;
+  justify-content: center; */
+  height: "30px";
+  align-items: "center";
+  display: "flex";
+  justify-content: "center"; 
+  justify-self: "center";
+  text-align: "center";
+}
 
 /* LOADING SPINNER */
 
