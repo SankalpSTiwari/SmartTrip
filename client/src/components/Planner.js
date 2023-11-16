@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Markdown from "react-markdown";
+import ReactMarkdown from 'react-markdown';
 
 const Planner = () => {
   const [destination, setDestination] = useState("California");
@@ -211,20 +212,16 @@ const Planner = () => {
             </div>
 
             <div className="form-right">
-              <div className="form-plan-container">
-                <label htmlFor="tripPlan" style={{ marginBottom: "1px" }}>
-                  Trip Plan
-                </label>
-                <br />
-                <textarea
-                  className="form-trip-plan"
-                  id="tripPlan"
-                  rows="5"
-                  value={tripPlan}
-                  readOnly
-                />
-              </div>
-            </div>
+      <div className="form-plan-container">
+        <label htmlFor="tripPlan" style={{ marginBottom: "1px" }}>
+          Trip Plan
+        </label>
+        <br />
+        <div className="form-trip-plan">
+          <ReactMarkdown>{tripPlan}</ReactMarkdown>
+        </div>
+      </div>
+    </div>
           </div>
         </div>
       </form>
