@@ -38,7 +38,7 @@ img {
 .container {
   max-width: 1100px;
   margin: auto;
-  overflow: hidden;
+  /* overflow: hidden; */
   padding: 0 2rem;
   margin-top: 6rem;
   margin-bottom: 3rem;
@@ -60,10 +60,10 @@ img {
   /* max-width: 1100px; */
   /* margin: auto; */
   display: flex;
-  overflow: hidden;
+  /* overflow: hidden; */
   padding: 0 2rem;
   margin-top: 3.9rem;
-  margin-bottom: 3rem;
+  /* margin-bottom: 3rem; */
   height: 100vh;
   background-color: #343a40;
   background: url('./img/travel6.jpeg') no-repeat center center/cover;
@@ -74,9 +74,9 @@ img {
 
 
 .form-container{
-  display: flex;
-  flex-wrap: wrap;
-  width: 200vh;
+  /* display: flex; */
+  /* flex-wrap: wrap; */
+  width: 140vh;
 }
 
 
@@ -87,7 +87,7 @@ img {
 }
 
 .form-box{
-  width: 80%;
+  width: 100%;
   height: 70vh;
   margin: 50px auto;
   border: 1px solid #17a2b8;
@@ -138,21 +138,171 @@ img {
 }
 
 .form-plan-container{
+  justify-content: center;
   margin-top: 10px;
   text-align: center;
+  width: 140vh;
+  height: 80vh;
+  background-color: rgb(35, 36, 36);
+  border: 1px solid #17a2b8;
+  overflow-y: scroll;
+}
+
+.planner-container-2 {
+  /* max-width: 1100px; */
+  /* margin: auto; */
+  display: flex;
+  /* overflow: hidden; */
+  padding: 0 2rem;
+  /* margin-top: 3.6rem; */
+  /* margin-bottom: 3rem; */
+  height: 100vh;
+  width: 100%;
+  background-color: #343a40;
+  background: url('./img/travel6.jpeg') no-repeat center center/cover;
+  color: #f4f4f4;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-bottom{
+  /* margin-top: 2rem; */
+  justify-content: center;
+  text-align: center;
+  align-items: center;
 }
 
 .form-trip-plan{
+  padding-left: 35px;
+  padding-right: 25px;
+  padding-top: 10px;
+  padding-bottom: 15px;
   overflow-y: scroll;
+  /* overflow: scroll; */
+  justify-content: center;
   /* margin-top: 10px; */
-  width: 60vh;
-  height: 45vh;
-  background-color: rgb(35, 36, 36);
-  border: 1px solid #17a2b8;
   text-align: left;
+  margin: auto;
+}
+
+.form-trip-plan h1{
+  text-align: center;
+  /* margin-bottom: 10px;
+  font-size: 20px;
+  font-family: 'Nanum Myeongjo', serif; */
+}
+
+.form-trip-plan h2{
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.form-trip-plan h2:after{
+    content:' ';
+    display:block;
+    border:0.2px solid rgb(205, 213, 215);
+    margin-bottom: 4px;
+}
+
+.form-trip-plan ul{
+  list-style:disc;
+  /* padding-bottom: 10px; */
+}
+
+.form-trip-plan li, p{
+  padding-bottom: 3px;
 }
 
 
+/* LOADING SPINNER */
+
+
+.lds-roller {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-roller div {
+  animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  transform-origin: 40px 40px;
+}
+.lds-roller div:after {
+  content: " ";
+  display: block;
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #fff;
+  margin: -4px 0 0 -4px;
+}
+.lds-roller div:nth-child(1) {
+  animation-delay: -0.036s;
+}
+.lds-roller div:nth-child(1):after {
+  top: 63px;
+  left: 63px;
+}
+.lds-roller div:nth-child(2) {
+  animation-delay: -0.072s;
+}
+.lds-roller div:nth-child(2):after {
+  top: 68px;
+  left: 56px;
+}
+.lds-roller div:nth-child(3) {
+  animation-delay: -0.108s;
+}
+.lds-roller div:nth-child(3):after {
+  top: 71px;
+  left: 48px;
+}
+.lds-roller div:nth-child(4) {
+  animation-delay: -0.144s;
+}
+.lds-roller div:nth-child(4):after {
+  top: 72px;
+  left: 40px;
+}
+.lds-roller div:nth-child(5) {
+  animation-delay: -0.18s;
+}
+.lds-roller div:nth-child(5):after {
+  top: 71px;
+  left: 32px;
+}
+.lds-roller div:nth-child(6) {
+  animation-delay: -0.216s;
+}
+.lds-roller div:nth-child(6):after {
+  top: 68px;
+  left: 24px;
+}
+.lds-roller div:nth-child(7) {
+  animation-delay: -0.252s;
+}
+.lds-roller div:nth-child(7):after {
+  top: 63px;
+  left: 17px;
+}
+.lds-roller div:nth-child(8) {
+  animation-delay: -0.288s;
+}
+.lds-roller div:nth-child(8):after {
+  top: 56px;
+  left: 12px;
+}
+@keyframes lds-roller {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* LOADING SPINNER END */
 
 /* Text Styles*/
 .x-large {
