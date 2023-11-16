@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Markdown from "react-markdown";
-import ReactMarkdown from 'react-markdown';
+import ReactMarkdown from "react-markdown";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import GeneratedTrip from "./GeneratedTrip";
 
 const Planner = () => {
   const [destination, setDestination] = useState("California");
@@ -13,6 +15,8 @@ const Planner = () => {
   const [foodPreference, setFoodPreference] = useState("Foodie/Experimental");
   const [optionalPreferences, setOptionalPreferences] = useState("None");
   const [tripPlan, setTripPlan] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,6 +31,18 @@ const Planner = () => {
     } catch (error) {
       console.error(error);
     }
+    {
+      /* THIS PART FOR NEW PAGE PLAN */
+    }
+    // try {
+    //   const prompt = `Generate a personalized travel itinerary for a trip to ${destination} with a budget of ${budget}. The traveler is interested in a ${travelStyle} vacation and enjoys ${activityType} type of activities. The traveler type is ${travelerType}. The itinerary should include ${foodPreference} options for food. Please provide a detailed itinerary for ${duration} days. The traveler has also requested these preferences: ${optionalPreferences}`;
+    //   const response = await axios.post("api/trips/generate", {
+    //     prompt,
+    //   });
+    //   navigate("/generated-trip"); // Navigate to the GeneratedTrip component
+    // } catch (error) {
+    //   console.error(error);
+    // }
   };
 
   return (
@@ -212,22 +228,23 @@ const Planner = () => {
             </div>
 
             <div className="form-right">
-      <div className="form-plan-container">
-        <label htmlFor="tripPlan" style={{ marginBottom: "1px" }}>
-          Trip Plan
-        </label>
-        <br />
-        <div className="form-trip-plan">
-          <ReactMarkdown>{tripPlan}</ReactMarkdown>
-        </div>
-      </div>
-    </div>
+              <div className="form-plan-container">
+                <label htmlFor="tripPlan" style={{ marginBottom: "1px" }}>
+                  Trip Plan
+                </label>
+                <br />
+                <div className="form-trip-plan">
+                  <ReactMarkdown>{tripPlan}</ReactMarkdown>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </form>
-      {/* <div className="form-box-plan"> */}
-
-      {/* </div> */}
+      {/* THIS PART FOR NEW PAGE PLAN */}
+      {/* <Routes>
+        <Route path="/generated-trip" component={GeneratedTrip} />
+      </Routes> */}
     </div>
   );
 };
