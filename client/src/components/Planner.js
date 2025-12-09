@@ -18,12 +18,15 @@ const Planner = () => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [tripPlan, setTripPlan] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
 
   // const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrorMessage("");
     setIsLoading(true);
+    setTripPlan(null);
 
     try {
       const prompt = `Generate a personalized travel itinerary for a trip to ${destination} with a budget of ${budget}. The traveler is interested in a ${travelStyle} vacation and enjoys ${activityType} type of activities. The traveler type is ${travelerType}. The itinerary should include ${foodPreference} options for food. Please provide a detailed itinerary for ${duration} days. The traveler has also requested these preferences: ${optionalPreferences}`;
@@ -37,6 +40,11 @@ const Planner = () => {
       console.log(response.data);
     } catch (error) {
       console.error(error);
+      const msg =
+        error?.response?.data ||
+        error?.message ||
+        "Something went wrong while generating the trip.";
+      setErrorMessage(msg);
     } finally {
       setIsLoading(false);
     }
@@ -401,6 +409,12 @@ const Planner = () => {
                   <div>Download Plan</div>
                 </div>
               </button> */}
+            </div>
+          ) : errorMessage ? (
+            <div className="form-plan-container">
+              <div style={{ color: "red", fontWeight: "600" }}>
+                {errorMessage}
+              </div>
             </div>
           ) : null}
         </div>
