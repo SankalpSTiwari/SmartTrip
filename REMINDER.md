@@ -9,4 +9,3 @@
   - `MONGO_URI="..." OPENAI_API_KEY="..." PORT=5001 npm run server`
   - `PORT=3001 npm run client`
 - Rotate keys if they ever leak and update `.env` locally (do not commit).
-
