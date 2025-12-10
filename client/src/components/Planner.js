@@ -1,9 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Markdown from "react-markdown";
 import ReactMarkdown from "react-markdown";
-import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
-import GeneratedTrip from "./GeneratedTrip";
 import downloadIcon from "../img/downloadIcon.png";
 
 const Planner = () => {
@@ -19,6 +16,29 @@ const Planner = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [tripPlan, setTripPlan] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
+  const [savedPlans, setSavedPlans] = useState([]);
+  const [copyState, setCopyState] = useState("Copy");
+
+  // Load any locally saved plans (simple localStorage history)
+  useEffect(() => {
+    const stored = localStorage.getItem("smarttrip_plans");
+    if (stored) {
+      try {
+        setSavedPlans(JSON.parse(stored));
+      } catch (e) {
+        console.error("Failed to parse saved plans", e);
+      }
+    }
+  }, []);
+
+  const persistPlans = (plans) => {
+    setSavedPlans(plans);
+    try {
+      localStorage.setItem("smarttrip_plans", JSON.stringify(plans.slice(0, 5)));
+    } catch (e) {
+      console.error("Failed to persist plans", e);
+    }
+  };
 
   // const navigate = useNavigate();
 
@@ -37,7 +57,15 @@ const Planner = () => {
       });
 
       setTripPlan(response.data);
-      console.log(response.data);
+      const newEntry = {
+        id: Date.now(),
+        destination,
+        duration,
+        travelStyle,
+        createdAt: new Date().toISOString(),
+        content: response.data,
+      };
+      persistPlans([newEntry, ...savedPlans].slice(0, 5));
     } catch (error) {
       console.error(error);
       const msg =
@@ -68,14 +96,10 @@ const Planner = () => {
     // setDestination("");
     const formTripPlan = document.querySelector(".form-trip-plan");
     const formBottom = document.querySelector(".form-bottom");
-    const loading = document.querySelector(".lds-roller");
-
-    // if (loading) {
     window.scrollTo({
       top: formBottom.offsetTop,
       behavior: "smooth",
     });
-    // }
   };
 
   const handleSaveToLocal = () => {
@@ -94,6 +118,30 @@ const Planner = () => {
 
     // Remove the link from the body
     document.body.removeChild(link);
+  };
+
+  const handleCopy = async () => {
+    if (!tripPlan) return;
+    try {
+      await navigator.clipboard.writeText(tripPlan);
+      setCopyState("Copied!");
+      setTimeout(() => setCopyState("Copy"), 1500);
+    } catch (e) {
+      setCopyState("Copy failed");
+      setTimeout(() => setCopyState("Copy"), 1500);
+    }
+  };
+
+  const handleLoadSaved = (plan) => {
+    setTripPlan(plan.content);
+    setDestination(plan.destination);
+    setDuration(plan.duration);
+    setTravelStyle(plan.travelStyle);
+    setErrorMessage("");
+    window.scrollTo({
+      top: document.querySelector(".form-bottom").offsetTop,
+      behavior: "smooth",
+    });
   };
 
   return (
@@ -278,9 +326,10 @@ const Planner = () => {
                   <button
                     type="submit"
                     className="btn btn-primary"
+                    disabled={isLoading}
                     onClick={handleGenerateNewPlan}
                   >
-                    Generate trip plan!
+                    {isLoading ? "Generating..." : "Generate trip plan!"}
                   </button>
                 </div>
               </div>
@@ -333,6 +382,44 @@ const Planner = () => {
       </Routes> */}
       </div>
       <div className="planner-container-2">
+        {savedPlans.length > 0 && (
+          <div className="form-plan-container" style={{ marginBottom: "16px" }}>
+            <div style={{ fontWeight: 600, marginBottom: "6px" }}>
+              Recent plans
+            </div>
+            <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+              {savedPlans.map((plan) => (
+                <li
+                  key={plan.id}
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    padding: "8px 0",
+                    borderBottom: "1px solid #eee",
+                  }}
+                >
+                  <div>
+                    <div style={{ fontWeight: 600 }}>
+                      {plan.destination} • {plan.duration} days
+                    </div>
+                    <div style={{ fontSize: "12px", color: "#666" }}>
+                      {new Date(plan.createdAt).toLocaleString()}
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    className="download-button"
+                    style={{ width: "96px" }}
+                    onClick={() => handleLoadSaved(plan)}
+                  >
+                    Load
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
         <div className="form-bottom">
           {isLoading ? (
             // <div className="loading-spinner">Loading...</div>
@@ -382,6 +469,7 @@ const Planner = () => {
                 ></i> */}
                 <img
                   src={downloadIcon}
+                      alt="Download trip plan"
                   style={{
                     width: "22px",
                     height: "20px",
@@ -392,6 +480,23 @@ const Planner = () => {
                 />
                 Download Plan
               </button>
+                  <button
+                    type="button"
+                    className="download-button"
+                    onClick={handleCopy}
+                    style={{
+                      fontSize: "13px",
+                      width: "130px",
+                      paddingTop: "2px",
+                      paddingBottom: "2px",
+                      marginBottom: "10px",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {copyState}
+                  </button>
               {/* <button
                 
               >

@@ -17,8 +17,8 @@ const getOpenAI = () => {
 // @desc    Generate a post
 // @access  Private
 router.post("/generate", async (req, res) => {
-  const { prompt } = req.body;
-
+    const { prompt } = req.body;
+  
   if (!prompt || !prompt.trim()) {
     return res.status(400).send('Prompt is required');
   }
@@ -43,7 +43,7 @@ router.post("/generate", async (req, res) => {
     const content = completion.choices[0]?.message?.content || '';
     console.log(content);
     global_response = content;
-    global_prompt = prompt;
+    global_prompt = prompt; 
     res.send(content);
   } catch (err) {
     const status = err?.status || err?.response?.status;
@@ -54,6 +54,6 @@ router.post("/generate", async (req, res) => {
     console.error('OpenAI error:', err.message);
     res.status(status || 500).send(msg);
   }
-});
+  });
 
 module.exports = router;
