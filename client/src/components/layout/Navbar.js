@@ -8,7 +8,12 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const authLinks = (
     <ul>
       <li>
-        <a onClick={logout} href="/">
+        <Link className="nav-pill" to="/planner">
+          Planner
+        </Link>
+      </li>
+      <li>
+        <a onClick={logout} href="/" className="nav-pill">
           <i className="fas fa-sign-out-alt"></i>{" "}
           <span className="hide-sm">Logout</span>
         </a>
@@ -18,18 +23,27 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const guestLinks = (
     <ul>
       <li>
-        <Link to="/register">Register</Link>
+        <Link className="nav-pill" to="/planner">
+          Planner
+        </Link>
       </li>
       <li>
-        <Link to="/login">Login</Link>
+        <Link className="nav-pill" to="/register">
+          Sign Up
+        </Link>
+      </li>
+      <li>
+        <Link className="nav-pill" to="/login">
+          Login
+        </Link>
       </li>
     </ul>
   );
   return (
-    <nav className="navbar bg-dark">
-      <h1 className="navbar-heading">
-        <Link to="/">
-          <i className="fas fa-code"></i> SmartTrip
+    <nav className="navbar">
+      <h1 className="navbar-heading brand">
+        <Link to="/" className="brand">
+          <i className="fas fa-route"></i> SmartTrip
         </Link>
       </h1>
       {!loading && (

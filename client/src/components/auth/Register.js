@@ -47,7 +47,6 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                 name="name"
                 value={name}
                 onChange={(e) => onChange(e)}
-                style={{ fontFamily: "Nanum Myeongjo", fontSize: "15px" }}
                 // required
               />
             </div>
@@ -58,7 +57,6 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                 name="email"
                 value={email}
                 onChange={(e) => onChange(e)}
-                style={{ fontFamily: "Nanum Myeongjo", fontSize: "15px" }}
                 // required
               />
               {/* <small className="form-text">
@@ -73,7 +71,6 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                 name="password"
                 value={password}
                 onChange={(e) => onChange(e)}
-                style={{ fontFamily: "Nanum Myeongjo", fontSize: "15px" }}
                 // minLength='6'
               />
             </div>
@@ -84,7 +81,6 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                 name="password2"
                 value={password2}
                 onChange={(e) => onChange(e)}
-                style={{ fontFamily: "Nanum Myeongjo", fontSize: "15px" }}
                 // minLength='6'
               />
             </div>

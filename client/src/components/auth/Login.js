@@ -41,7 +41,6 @@ const Login = ({ login, isAuthenticated }) => {
                 value={email}
                 onChange={(e) => onChange(e)}
                 required
-                style={{ fontFamily: "Nanum Myeongjo", fontSize: "15px" }}
               />
             </div>
             <div className="form-group">
@@ -52,7 +51,6 @@ const Login = ({ login, isAuthenticated }) => {
                 value={password}
                 onChange={(e) => onChange(e)}
                 minLength="6"
-                style={{ fontFamily: "Nanum Myeongjo", fontSize: "15px" }}
               />
             </div>
             <input type="submit" className="btn btn-primary" value="Login" />
